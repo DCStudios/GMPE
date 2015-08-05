@@ -1,12 +1,12 @@
 /// GMPE_Error( script, description )
 /**
     @syntax GMPE_Error( script, description )
-	@author Cedrik Dubois
-	@param   script        			 The name of the script in which the error occured.
-	@param   [string]  description   Description of the error
-	@desc                            This function is an alternative to 'show_error'.
-									 It will format the error so its easier to read.
-	@returns
+    @author Cedrik Dubois
+    @param             script        The name of the script in which the error occured.
+    @param   [string]  description   Description of the error
+    @desc                            This function is an alternative to 'show_error'.
+                                     It will format the error so its easier to read.
+    @returns
 */
 
 var content = "";
