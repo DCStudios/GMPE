@@ -1,42 +1,31 @@
 /// GMPE_SendEvent( event_name, data );
 /*
-    * Note: You can only use this function inside object that have previously
-            called the "GMPE_EnableEvents" function.
-            
-    Send an event from this object with the data.
-    
-    Returns true if success, false if failed.
+    Send an event to all listeners of that event.
 */
-//  --  Get the arguments
 
-    var T,D;
-    if( argument_count != 2 ) GMPE_Error( "GMPE_SendEvent", "Wrong number of arguments!" );
-    T = argument[0];    // The event type
-    D = argument[1];    // The event data
-    
-//  --  Validate arguments
+// -- Get the parameters
 
-    if( !is_string( T ) ) show_error( "GMPE_SendEvent: Event type must be a string!", true );
-    if( T == "" ) return false;             // Make sure type isn't empty
-    if( is_undefined( D ) ) return false;   // Make sure data is readable
+    var E,D;
+    E = argument[0]; // The event to send
+    D = argument[1]; // The data to send with the event
     
-//  --  Send the event
+// -- Make sure parameters are alright
 
-    // Check if anyone is listeneing to the event
-    var CL; // Callback list
-    var CD; // Callback data
+    if( !is_string( E ) ) { evt_error( "SendEvent(): The name of the event must be a string!" ); exit; }
     
-    if( ds_map_exists( GMPE_Listeners, T ) )
-    {
-        // Get all the callbacks to call
-        CL = GMPE_Listeners[? T];
+// -- Remove the event from the object
+
+    var i;          // Used in loops
+    var L;          // List of all callbacks for an event
+    var C;          // A callback object
+    
+    if( ds_map_exists( evtListeners, E ) ) {
+        L = evtListeners[? E];
         
-        // Call each callback, sending the id and the data as arguments
-        for( var i=0; i<ds_list_size( CL ); i++ )
-        {
-            CD = CL[| i];
-            if( instance_exists( CD[0] ) ) with( CD[0] ) script_execute( CD[1], id, D );
+        for( i=0; i<ds_list_size( L ); i++ ) {
+            C = L[| i];
+            if( instance_exists( C[0] ) ) {
+                if( script_exists( C[1] ) ) with( C[0] ) script_execute( C[1], other.id, D );
+            }
         }
     }
-    
-return true;

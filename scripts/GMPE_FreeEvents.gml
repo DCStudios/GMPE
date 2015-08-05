@@ -1,18 +1,25 @@
 /// GMPE_FreeEvents();
 /*
-    Free any used memory
+    Removes all listeners and free's memory.
 */
+    
+// -- Remove the event from the object
 
-//  --  First, destroy all the list inside the map
-
-    var GMPE_Key;
-    GMPE_Key = ds_map_find_first( GMPE_Listeners );
-    while( !is_undefined( GMPE_Key ) )
-    {
-        ds_list_destroy( GMPE_Key );
-        GMPE_Key = ds_map_find_next( GMPE_Listeners, GMPE_Key );
+    var i; // Used in loops
+    var L; // List of all callbacks for an event
+    var D; // A callback object
+    var E; // The event's name
+    
+    E = ds_map_find_first( evtListeners );
+    while( !is_undefined( evtListeners[? E] ) ) {
+        L = evtListeners[? E];
+        ds_list_clear( L );
+        ds_list_destroy( L );
+        
+        var oldKey = E;
+        E = ds_map_find_next( evtListeners, E );
+        ds_map_delete( evtListeners, oldKey );
     }
     
-//  --  Next, destroy the map
-
-    ds_map_destroy( GMPE_Listeners );
+    ds_map_clear( evtListeners );
+    ds_map_destroy( evtListeners );

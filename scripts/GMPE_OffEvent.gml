@@ -1,56 +1,37 @@
-/// GMPE_OffEvent( id, event_name, callback )
+/// GMPE_OffEvent( fromID, event_name, callback );
 /*
-    Remove a previously OnEvent.
-    
-    Returns true on success, false if failed.
+    Stop listening to an event from an object.
 */
-//  --  Get the arguments
 
-    var O,T,C;
-    if( argument_count != 3 ) show_error( "GMPE_OffEvent: Wrong number of arguments!", true );
-    O = argument[0];    // Object that was listened
-    T = argument[1];    // Event type that was listened
-    C = argument[2];    // Callback that was called
-    
-//  --  Validate the arguments
+// -- Get the parameters
 
-    if( !instance_exists( O ) ) return false;               // Make sure object exists
-    if( is_undefined( O.GMPE_Listeners ) ) return false;    // Make sure object can send events
-    if( !is_string( T ) ) show_error( "GMPE_OffEvent: Event type must be a string!", true );
-    if( T == "" ) return false;                             // Make sure event type isn't empty
-    if( !script_exists( C ) ) return false;                 // Make sure callback exists
+    var F,E,C;
+    F = argument[0]; // From who should we listen for the event
+    E = argument[1]; // The name of the event to listen for
+    C = argument[2]; // The script to execute when the event occures
     
-//  --  Remove listener
+// -- Make sure parameters are alright
 
-    var CL; // List of callbacks
-    var CD; // Callback Data
+    if( !instance_exists( F ) ) exit;
+    else if( !is_string( E ) ) { evt_error( "OffEvent(): The name of the event must be a string!" ); exit; }
+    else if( !script_exists( C ) ) exit;
     
-    // Check if event was listened to
-    if( ds_map_exists( O.GMPE_Listeners, T ) )
-    {
-        // Get the list of callbacks
-        CL = O.GMPE_Listeners[? T];
-        for( var i=0; i<ds_list_size( CL ); i++ )
-        {
-            // Delete the callback matching the argument
-            CD = CL[| i];
-            if( CD[0] == id && CD[1] == C )
-            {
-                ds_list_delete( CL, i );
+// -- Remove the event from the object
+
+    var i;          // Used in loops
+    var L;          // List of all callbacks for an event
+    var D;          // A callback object
+    
+    if( ds_map_exists( F.evtListeners, E ) ) {
+        L = F.evtListeners[? E];
+        
+        for( i=0; i<ds_list_size( L ); i++ ) {
+            D = L[| i];
+            if( D[0] == id && D[1] == C ) {
+                ds_list_delete( L,i );
                 break;
             }
         }
         
-        // If there are no more callbacks, destroy the list
-        if( ds_list_size( CL ) == 0 )
-        {
-            ds_list_destroy( CL );
-            ds_list_destroy( O.GMPE_Listeners[? T] );
-            ds_map_delete( O.GMPE_Listeners, T );
-        }
-        // Otherwise update the listener list of the event
-        else O.GMPE_Listeners[? T] = CL;
+        F.evtListeners[? E] = L;
     }
-    else return false;
-    
-return true;

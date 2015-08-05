@@ -1,6 +1,7 @@
-/// GMPE_EnableEvents();
+/// GMPE_EnableEvents()
 /*
-    Enable sending events in this object
+    Creates the needed data structures to be able to let other
+    objects listen to the event this object will send.
 */
 
-GMPE_Listeners = ds_map_create();
+evtListeners = ds_map_create();

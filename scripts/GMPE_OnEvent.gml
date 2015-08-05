@@ -1,52 +1,58 @@
-/// GMPE_OnEvent( id, event_name, callback )
+/// GMPE_OnEvent( fromID, event_name, callback );
 /*
-    When the event <type> occures from <object>,
-    the scripts <callback> will be executed.
+    Execute a script ( <callback> ) when the <event_name> is thrown
+    from the <fromID> object.
     
-    Don't forget to call "GMPE_OffEvent" to remove the
-    callback from the listeners.
     
-    Returns true on success, false if failed.
+    - NOTE -
+    
+        If you try to listen to an event that this object already listens to,
+        nothing will happen.
 */
-//  --  Get the arguments
 
-    var O,T,C;
-    if( argument_count != 3 ) show_error( "GMPE_OnEvent: Wrong number of arguments!", true );
-    O = argument[0];    // Object to listen
-    T = argument[1];    // Event type to listen
-    C = argument[2];    // Callback to call when even occurs
-    
-//  --  Validate the arguments
+// -- Get the parameters
 
-    if( !instance_exists( O ) ) return false;               // Make sure object exists
-    if( is_undefined( O.GMPE_Listeners ) ) return false;    // Make sure object can send events
-    if( !is_string( T ) ) show_error( "GMPE_OnEvent: Event type must be a string!", true );
-    if( T == "" ) return false;                             // Make sure event type isn't empty
-    if( !script_exists( C ) ) return false;                 // Make sure callback exists
+    var F,E,C;
+    F = argument[0]; // From who should we listen for the event
+    E = argument[1]; // The name of the event to listen for
+    C = argument[2]; // The script to execute when the event occures
     
-//  --  Add listener
+// -- Make sure parameters are alright
 
+    if( !instance_exists( F ) ) { evt_error( "OnEvent(): Trying to listen to an instance that doesn't exists!" ); exit; }
+    else if( !is_string( E ) ) { evt_error( "OnEvent(): The name of the event must be a string!" ); exit; }
+    else if( !script_exists( C ) ) { evt_error( "OnEvent(): The callback doesn't exists!" ); exit; }
+    
+// -- Add the event to the object
 
-    var CL; // List of callbacks
-    var CD; // Callback data
+    var i;          // Used in loops
+    var A = false;  // 'A' stands for 'abort'
+    var L;          // List of all callbacks for an event
+    var D;          // A callback object
     
-    // Try to get the list of callback, else create a new one
-    if( ds_map_exists( O.GMPE_Listeners, T ) ) CL = O.GMPE_Listeners[? T];
-    else CL = ds_list_create();
-    
-    // Check if callback is not already present
-    for( var i=0; i<ds_list_size( CL ); i++ )
-    {
-        CD = CL[| i];
-        if( CD[0] == id && CD[1] == C ) return false;
+    if( ds_map_exists( F.evtListeners, E ) ) {
+        L = F.evtListeners[? E];
+        for( i=0; i<ds_list_size( L ); i++ ) {
+            D = L[| i];
+            if( D[0] == id && D[1] == C ) {
+                A = true;
+                break;
+            }
+        }
+        
+        if( !A ) {
+            D=0; // Unassign array
+            D[0] = id;
+            D[1] = C;
+            ds_list_add( L,D );
+        }
+        
+        F.evtListeners[? E] = L;
     }
-    
-    // Add the callback to thelist
-    CD[0] = id;
-    CD[1] = C;
-    ds_list_add( CL, CD );
-    
-    // Add the new list of callback in the listeners list
-    O.GMPE_Listeners[? T] = CL;
-    
-return true;
+    else {
+        L = ds_list_create();
+        D[0] = id;
+        D[1] = C;
+        ds_list_add( L,D );
+        F.evtListeners[? E] = L;
+    }
