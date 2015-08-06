@@ -11,24 +11,18 @@
   <scripts name="scripts">
     <scripts name="GMPE - GameMaker Presentation Extension">
       <script>scripts\GMPE_MANUAL_README.gml</script>
+      <scripts name="Utils">
+        <script>scripts\GMPE_Point.gml</script>
+        <script>scripts\GMPE_Rect.gml</script>
+        <script>scripts\GMPE_Error.gml</script>
+      </scripts>
       <scripts name="Events">
+        <script>scripts\evt_error.gml</script>
         <script>scripts\GMPE_EnableEvents.gml</script>
         <script>scripts\GMPE_OnEvent.gml</script>
         <script>scripts\GMPE_OffEvent.gml</script>
         <script>scripts\GMPE_SendEvent.gml</script>
         <script>scripts\GMPE_FreeEvents.gml</script>
-        <scripts name="group">
-          <script>scripts\EnableEvents.gml</script>
-          <script>scripts\OnEvent.gml</script>
-          <script>scripts\OffEvent.gml</script>
-          <script>scripts\SendEvent.gml</script>
-          <script>scripts\FreeEvents.gml</script>
-        </scripts>
-      </scripts>
-      <scripts name="Utils">
-        <script>scripts\GMPE_Point.gml</script>
-        <script>scripts\GMPE_Rect.gml</script>
-        <script>scripts\GMPE_Error.gml</script>
       </scripts>
       <scripts name="Callbacks">
         <script>scripts\GMPE_Control_AddedToContainer.gml</script>
