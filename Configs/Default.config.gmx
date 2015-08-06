@@ -267,7 +267,7 @@
     <option_scale>-1</option_scale>
     <option_scaleprogress>true</option_scaleprogress>
     <option_sci_UseSCI>-1</option_sci_UseSCI>
-    <option_sci_serverLocation>https://github.com/DCStudios/GMPE</option_sci_serverLocation>
+    <option_sci_serverLocation>https://CedSharp@bitbucket.org/CedSharp/gmpe.git</option_sci_serverLocation>
     <option_screenkey>True</option_screenkey>
     <option_screenshotkey>true</option_screenshotkey>
     <option_shortcircuit>True</option_shortcircuit>

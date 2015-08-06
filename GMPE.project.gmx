@@ -60,6 +60,9 @@
           <script>scripts\GMPE_SetLabelPadding.gml</script>
           <script>scripts\GMPE_UpdateLabel.gml</script>
         </scripts>
+        <scripts name="Button">
+          <script>scripts\GMPE_CreateButton.gml</script>
+        </scripts>
       </scripts>
     </scripts>
   </scripts>
