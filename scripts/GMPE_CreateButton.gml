@@ -21,7 +21,9 @@
     stateHover = noone;
     stateActive = noone;
     stateDeactivated = noone;
+    state = stateNormal;
     
-    sprite_index = stateNormal;
-    
+//  --  Set some flags
 
+    shouldRender = false;
+    

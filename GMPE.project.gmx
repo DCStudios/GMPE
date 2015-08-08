@@ -5,7 +5,11 @@
   </Configs>
   <NewExtensions/>
   <sounds name="sound"/>
-  <sprites name="sprites"/>
+  <sprites name="sprites">
+    <sprites name="GMPE_DEMO">
+      <sprite>sprites\spr_button_slice9</sprite>
+    </sprites>
+  </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
   <scripts name="scripts">
@@ -32,6 +36,7 @@
         <script>scripts\GMPE_Control_AddedToContainer.gml</script>
         <script>scripts\GMPE_Control_RemovedFromContainer.gml</script>
         <script>scripts\GMPE_Label_RequestRender.gml</script>
+        <script>scripts\GMPE_Button_RequestRender.gml</script>
       </scripts>
       <scripts name="Containers">
         <scripts name="Functions">
@@ -68,6 +73,9 @@
         </scripts>
         <scripts name="Button">
           <script>scripts\GMPE_CreateButton.gml</script>
+          <script>scripts\GMPE_DrawButton.gml</script>
+          <script>scripts\GMPE_FreeButton.gml</script>
+          <script>scripts\GMPE_UpdateButton.gml</script>
         </scripts>
       </scripts>
     </scripts>
@@ -84,6 +92,7 @@
       <objects name="Controls">
         <object>objects\GMPE_Control</object>
         <object>objects\GMPE_Label</object>
+        <object>objects\GMPE_Button</object>
       </objects>
     </objects>
     <object>objects\obj_controller</object>

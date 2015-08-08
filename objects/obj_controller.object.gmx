@@ -30,6 +30,7 @@
 //  --  Create the UI container
 
     ui = instance_create( 0,0,GMPE_Surface );
+    ui.child_limit = 4;
     GMPE_SetDimensions( ui, 0,0,room_width,room_height );
     
 //  --  Add a label
@@ -42,6 +43,28 @@
     GMPE_SetLabelPadding( label1, 8, 8, 4, 4 );
     
     GMPE_AddChild( ui, label1 );
+    
+//  --  Create some skins
+
+    var s1,s2,s3,s4;
+    s1 = GMPE_CreateSlice9( spr_button_slice9,0,8,8,8,8 );
+    s2 = GMPE_CreateSlice9( spr_button_slice9,1,8,8,8,8 );
+    s3 = GMPE_CreateSlice9( spr_button_slice9,2,8,8,8,8 );
+    s4 = GMPE_CreateSlice9( spr_button_slice9,3,8,8,8,8 );
+    
+//  --  Create a button
+
+    button1 = instance_create( 0,0,GMPE_Button );
+    GMPE_SetDimensions( button1, 16, 48, 256, 48 );
+    GMPE_AddChild( ui,button1 );
+
+    button1.stateNormal = GMPE_UseSlice9( s1, 256, 48 );
+    button1.stateHover = GMPE_UseSlice9( s2, 256, 48 );
+    button1.stateActive = GMPE_UseSlice9( s3, 256, 48 );
+    button1.stateDisabled = GMPE_UseSlice9( s4, 256, 48 );
+    button1.state = button1.stateNormal;
+    
+    button1.shouldRender = true;
 </string>
           </argument>
         </arguments>

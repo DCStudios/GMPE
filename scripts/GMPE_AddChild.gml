@@ -20,6 +20,8 @@
         else
         {
             C.parent = P;
+            C.parentx = P.x;
+            C.parenty = P.y;
             ds_list_add( P.childs, C );
             with( C ) GMPE_SendEvent( "addedToContainer", P );
         }

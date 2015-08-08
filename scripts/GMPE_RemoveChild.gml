@@ -19,5 +19,7 @@
     {
         ds_list_delete( P.childs, ds_list_find_index( P.childs, C ) );
         C.parent = noone;
+        C.parentx = 0;
+        C.parenty = 0;
         with( C ) GMPE_SendEvent( "removedFromContainer", 0 );
     }

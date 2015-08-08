@@ -4,6 +4,10 @@
     Returns the handle of an array ( the structure )
 */
 
+//  --  Validate argument count
+
+    if( argument_count != 6 ) { GMPE_Error( "GMPE_CreateSlice9", "Wrong number of arguments!" ); exit; }
+
 //  --  Load the arguments
 
     var i,j,S,I,L,R,T,B,W,H,SW,SH,CW,CH;
@@ -15,6 +19,13 @@
     B = argument[5];                // bottom
     SW = sprite_get_width( S );     // Width of the sprite
     SH = sprite_get_height( S );    // Height of the sprite
+    CW = SW - ( L+R );
+    CH = SH - ( T+B );
+    
+//  --  Validate dimensions
+
+    if( CW <= 0 ) { GMPE_Error( "GMPE_CreateSlice9", "Dimensions are invalid!" ); exit; }
+    else if( CH <= 0 ) { GMPE_Error( "GMPE_CreateSlice9", "Dimensions are invalid!" ); exit; }
     
 //  --  Decompose the sprite on multiple surfaces
 
