@@ -12,7 +12,8 @@
     <scripts name="GMPE - GameMaker Presentation Extension">
       <script>scripts\GMPE_MANUAL_README.gml</script>
       <scripts name="Skins">
-        <script>scripts\GMPE_CreateSkin.gml</script>
+        <script>scripts\GMPE_CreateSlice9.gml</script>
+        <script>scripts\GMPE_UseSlice9.gml</script>
       </scripts>
       <scripts name="Utils">
         <script>scripts\GMPE_Point.gml</script>
@@ -69,7 +70,6 @@
           <script>scripts\GMPE_CreateButton.gml</script>
         </scripts>
       </scripts>
-      <script>scripts\BuildFromSlice9.gml</script>
     </scripts>
   </scripts>
   <fonts name="fonts">
