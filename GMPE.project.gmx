@@ -11,6 +11,9 @@
   <scripts name="scripts">
     <scripts name="GMPE - GameMaker Presentation Extension">
       <script>scripts\GMPE_MANUAL_README.gml</script>
+      <scripts name="Skins">
+        <script>scripts\GMPE_CreateSkin.gml</script>
+      </scripts>
       <scripts name="Utils">
         <script>scripts\GMPE_Point.gml</script>
         <script>scripts\GMPE_Rect.gml</script>
@@ -48,6 +51,7 @@
       <scripts name="Controls">
         <scripts name="Control">
           <script>scripts\GMPE_CreateControl.gml</script>
+          <script>scripts\GMPE_CreateContainerControl.gml</script>
           <script>scripts\GMPE_DrawControl.gml</script>
           <script>scripts\GMPE_FreeControl.gml</script>
         </scripts>
@@ -56,6 +60,7 @@
           <script>scripts\GMPE_FreeLabel.gml</script>
           <script>scripts\GMPE_DrawLabel.gml</script>
           <script>scripts\GMPE_SetLabelFont.gml</script>
+          <script>scripts\GMPE_SetLabelText.gml</script>
           <script>scripts\GMPE_SetLabelColor.gml</script>
           <script>scripts\GMPE_SetLabelPadding.gml</script>
           <script>scripts\GMPE_UpdateLabel.gml</script>
@@ -64,6 +69,7 @@
           <script>scripts\GMPE_CreateButton.gml</script>
         </scripts>
       </scripts>
+      <script>scripts\BuildFromSlice9.gml</script>
     </scripts>
   </scripts>
   <fonts name="fonts">
