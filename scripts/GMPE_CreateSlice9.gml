@@ -15,8 +15,6 @@
     B = argument[5];                // bottom
     SW = sprite_get_width( S );     // Width of the sprite
     SH = sprite_get_height( S );    // Height of the sprite
-    CW = SW - L - R;                // Width of top and bottom borders
-    CH = SH - T - B;                // Height of left and right borders
     
 //  --  Decompose the sprite on multiple surfaces
 
@@ -44,6 +42,8 @@
     slice[GMPE_SLICE9_RIGHT] = R;
     slice[GMPE_SLICE9_TOP] = T;
     slice[GMPE_SLICE9_BOTTOM] = B;
+    slice[GMPE_SLICE9_SW] = SW;
+    slice[GMPE_SLICE9_SH] = SH;
     
     slice[GMPE_SLICE9_TL] = sprite_create_from_surface( sTL,0,0,surface_get_width(sTL),surface_get_height(sTL),false,false,0,0 );
     slice[GMPE_SLICE9_T] = sprite_create_from_surface( sT,0,0,surface_get_width(sT),surface_get_height(sT),false,false,0,0 );
